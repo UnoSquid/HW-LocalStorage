@@ -12,8 +12,6 @@
 	<meta name="author" content="John H. Pollman">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="normalize.css" media="screen" />
 	<link rel="stylesheet" href="style.css" />
@@ -25,51 +23,53 @@
 <div class="wrapper">
 	<header>
 		<h1>Vigilante Application</h1>
-		<h2>2012 rev. #1b75</h2>
+		<h2>2012-19 rev. #1b75a</h2>
 	</header>
 
 	<section>
 		<form>
 			<fieldset>
 				<legend>Personal Information</legend>
+				
+				<!--regular expressions are REALLY cryptic-->
 
 				<label for="name">Name: </label>
-				<input type="text" name="name" id="name" required="required"/>
+				<input type="text" name="name" id="name" required="required" pattern="" placeholder="Name"/>
 				<br>
 
 				<label for="age">Age: </label>
-				<input type="number" name="age" id="age" required="required"/>
+				<input type="number" name="age" id="age" required="required" pattern="[0-9]" placeholder="18"/>
 				<br>
 
 				<label for="email">Email: </label>
-				<input type="email" name="email" id="email" required="required"/>
+				<input type="email" name="email" id="email" required="required" pattern="^([a-zA-Z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})" placeholder="name@server.domain"/>
 				<br>
 
 				<label for="dayjob">Day Job: </label>
-				<input type="text" name="dayjob" id="dayjob" required="required"/>
+				<input type="text" name="dayjob" id="dayjob" required="required" placeholder="job"/>
 				<br>
 
 				<label for="startdate">Start Date: </label>
-				<input type="date" name="startdate" id="startdate" required="required"/>
+				<input type="date" name="startdate" id="startdate" required="required" pattern="[0-9]{4}[-][0-9]{1,2}[-][0-9]{1,2}"placeholder="yyyy-mm-dd"/>
 				<br>
 
 				<label for="blogurl">Blog URL: </label>
-				<input type="url" name="blogurl" id="blogurl" />
+				<input type="url" name="blogurl" id="blogurl" placeholder="http://"/>
 			</fieldset>
 
 			<fieldset>
 				<legend>Vigilante Details</legend>
 
 				<label for="vigilantename">Name: </label>
-				<input type="text" name="vigilantename" id="vigilantename" required="required"/>
+				<input type="text" name="vigilantename" id="vigilantename" required="required" placeholder="Vigilante Name"/>
 				<br>
 
 				<label for="symbol">Symbol: </label>
-				<input type="text" name="symbol" id="symbol" required="required"/>
+				<input type="text" name="symbol" id="symbol" required="required" placeholder="Symbol"/>
 				<br>
 
 				<label for="primarycolor">Primary Color: </label>
-				<input type="color" name="primarycolor" id="primarycolor" />
+				<input type="color" name="primarycolor" id="primarycolor" placeholder="#fa60ff"/>
 				<br>
 
 				<label for="motivations">Motivations: </label>
@@ -102,7 +102,7 @@
 				<br>
 
 				<label for="reason">Why Should We Choose You? </label>
-				<textarea name="reason" id="reason" required="required">Reason</textarea>
+				<textarea name="reason" id="reason" required="required" placeholder="Reason"></textarea>
 			</fieldset>
 
 			<fieldset>
@@ -111,7 +111,7 @@
 				<p>To ensure only qualified people apply, enter your pre-assigned unique vigilante invite code below.</p>
 
 				<label for="code">Vigilante Code: </label>
-				<input type="text" name="code" id="code" required="required"/>
+				<input type="text" name="code" id="code" required="required" maxlength="10" pattern="[0-9a-zA-Z]{7,10}"/>
 			</fieldset>
 
 			<button type="submit" id="submit">Submit Application</button>
@@ -135,7 +135,7 @@
 	// wait until the page is fully loaded to start firing our javascript
 	
 	function found(position) {
-		alert('hello?');
+		alert('Lrrr asks if this is on');
 		console.log(position);
 	}
 	
@@ -282,7 +282,7 @@
 		
 		var stored_symbol = localStorage.getItem('symbol');
 		if (stored_blogurl !== '') {
-			$('#blogurl').val(stored_blogurl);
+			$('#symbol').val(stored_symbol);
 		}
 		
 		var stored_primarycolor = localStorage.getItem('primarycolor');

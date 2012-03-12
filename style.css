@@ -1,15 +1,16 @@
 /*Local Storage Assignment CSS*/
+/*Colors so eye searing, they could only come from 1991*/
 
 body {
 	background: rgb(140,255,5);
-	font-family: 'Helvetica', 'Doppio One', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 }
 
 .wrapper {
-	width: 80%;
+	width: 75%;
 	margin: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 12px;
+	margin-bottom: 12px;
 	padding: 15px;
 	background-color: white;
 	border: 1px solid black;
@@ -30,12 +31,28 @@ fieldset {
 }
 
 fieldset>legend {
-	text-shadow: 1px 1px 1px rgb(55,220,255);
-	filter: dropshadow(color=rgb(55,220,255), offx=1, offy=1);
+	text-shadow: 1px 1px 1px rgb(55,200,255);
+	filter: dropshadow(color=rgb(55,200,255), offx=1, offy=1);
 }
 
 input {
 	margin: 2px;
+}
+
+input:valid {
+	background-color: rgba(55,200,255,0.6);
+}
+
+input:invalid {
+	background-color: rgba(250,95,255,0.6);
+}
+
+textarea:valid {
+	background-color: rgba(55,200,255,0.6);
+}
+
+textarea:invalid {
+	background-color: rgba(250,95,255,0.6);
 }
 
 select {
