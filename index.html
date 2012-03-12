@@ -7,13 +7,16 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title></title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<title>Vigilantes Wanted</title>
+	<meta name="description" content="Local Storage Assignment">
+	<meta name="author" content="John H. Pollman">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="normalize.css" media="screen" />
+	<link rel="stylesheet" href="style.css" />
 
 	<script src="modernizr-2.5.3.js"></script>
 </head>
@@ -30,64 +33,89 @@
 			<fieldset>
 				<legend>Personal Information</legend>
 
-				<label for="name">Name</label>
-				<input type="text" name="name" id="name" />
+				<label for="name">Name: </label>
+				<input type="text" name="name" id="name" required="required"/>
+				<br>
 
-				<label for="age">Age</label>
-				<input type="number" name="age" id="age" />
+				<label for="age">Age: </label>
+				<input type="number" name="age" id="age" required="required"/>
+				<br>
 
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email" />
+				<label for="email">Email: </label>
+				<input type="email" name="email" id="email" required="required"/>
+				<br>
 
-				<label for="dayjob">Day Job</label>
-				<input type="text" name="dayjob" id="dayjob" />
+				<label for="dayjob">Day Job: </label>
+				<input type="text" name="dayjob" id="dayjob" required="required"/>
+				<br>
 
-				<label for="startdate">Start Date</label>
-				<input type="date" name="startdate" id="startdate" />
+				<label for="startdate">Start Date: </label>
+				<input type="date" name="startdate" id="startdate" required="required"/>
+				<br>
 
-				<label for="blogurl">Blog URL</label>
+				<label for="blogurl">Blog URL: </label>
 				<input type="url" name="blogurl" id="blogurl" />
 			</fieldset>
 
 			<fieldset>
 				<legend>Vigilante Details</legend>
 
-				<label for="vigilantename">Name</label>
-				<input type="text" name="vigilantename" id="vigilantename" />
+				<label for="vigilantename">Name: </label>
+				<input type="text" name="vigilantename" id="vigilantename" required="required"/>
+				<br>
 
-				<label for="symbol">Symbol</label>
-				<input type="text" name="symbol" id="symbol" />
+				<label for="symbol">Symbol: </label>
+				<input type="text" name="symbol" id="symbol" required="required"/>
+				<br>
 
-				<label for="primarycolor">Primary Color</label>
+				<label for="primarycolor">Primary Color: </label>
 				<input type="color" name="primarycolor" id="primarycolor" />
+				<br>
 
-				<label for="motivations">Motivations</label>
-				<select name="motivations" id="motivations" multiple size="8">
-					<option value="parentskilled">Parents Killed In Front Me</option>
+				<label for="motivations">Motivations: </label>
+				<select name="motivations" id="motivations" multiple size="4" required="required">
+					<option value="parentskilled">Parents killed in front of me</option>
+					<option value="contractualobligation">Condition for gaining super powers</option>
+					<option value="girlfriendkidnapped">Girlfriend kidnapped</option>
+					<option value="badenoughdude">President kidnapped... by ninjas</option>
+					<option value="setonfire">Set on fire</option>
+					<option value="blenderstolen">Blender stolen</option>
+					<option value="robot">I am a robot, and I was programmed to do so</option>
+					<option value="apathy">Meh, why not?</option>
 					<!-- create at least 7 more vigilante motivations. must stay a multi-select. -->
 				</select>
+				<br>
 
-				<label for="weapon">Weapon of Choice</label>
-				<select name="weapon" id="weapon">
+				<label for="weapon">Weapon of Choice: </label>
+				<select name="weapon" id="weapon" required="required">
 					<option value=""></option>
 					<option value="fists">Bare Fists</option>
+					<option value="swords">Swords</option>
+					<option value="eyelasers">Eye Lasers</option>
+					<option value="sonicboom">Sonic Boom</option>
+					<option value="tentacles">Tentacles</option>
+					<option value="armcannon">Arm Cannon</option>
+					<option value="cheesegrater">Cheese Grater</option>
+					<option value="love">The Power of Love™</option>
 					<!-- create at least 7 more weapon options. must stay a single select. -->
 				</select>
+				<br>
 
-				<label for="reason">Why Should We Choose You?</label>
-				<textarea name="reason" id="reason"></textarea>
+				<label for="reason">Why Should We Choose You? </label>
+				<textarea name="reason" id="reason" required="required">Reason</textarea>
 			</fieldset>
 
 			<fieldset>
 				<legend>Verification</legend>
 
-				<p>To ensure only qualified people apply, enter your pre-assigned unique vigilante invite code blow.</p>
+				<p>To ensure only qualified people apply, enter your pre-assigned unique vigilante invite code below.</p>
 
-				<label for="code">Vigilante Code</label>
-				<input type="text" name="code" id="code" />
+				<label for="code">Vigilante Code: </label>
+				<input type="text" name="code" id="code" required="required"/>
 			</fieldset>
 
 			<button type="submit" id="submit">Submit Application</button>
+			<button type="reset" id="reset">Restart Application</button>
 		</form>
 	</section>
 	<footer>
@@ -105,6 +133,16 @@
 
 <script type="text/javascript">
 	// wait until the page is fully loaded to start firing our javascript
+	
+	function found(position) {
+		alert('hello?');
+		console.log(position);
+	}
+	
+	function notFound(position) {
+		console.log(position);
+	}
+	
 	$(document).ready(function() {
 		// call function that will populate form with info from local storage
 		populate_form_with_stored_info();
@@ -116,10 +154,92 @@
 				localStorage.setItem('name', $('#name').val());
 			}
 		});
-
+		
+		$('#age').change(function() {
+			if ($('#age').val() != '') {
+				localStorage.setItem('age', $('#age').val());
+			}
+		});
+		
+		$('#email').keyup(function() {
+			if ($('#email').val() != '') {
+				localStorage.setItem('email', $('#email').val());
+			}
+		});
+		
+		$('#dayjob').keyup(function() {
+			if ($('#dayjob').val() != '') {
+				localStorage.setItem('dayjob', $('#dayjob').val());
+			}
+		});
+		
+		$('#startdate').change(function() {
+			if ($('#startdate').val() != '') {
+				localStorage.setItem('startdate', $('#startdate').val());
+			}
+		});
+		
+		$('#blogurl').keyup(function() {
+			if ($('#blogurl').val() != '') {
+				localStorage.setItem('blogurl', $('#blogurl').val());
+			}
+		});
+		
+		$('#vigilantename').keyup(function() {
+			if ($('#vigilantename').val() != '') {
+				localStorage.setItem('vigilantename', $('#vigilantename').val());
+			}
+		});
+		
+		$('#symbol').keyup(function() {
+			if ($('#symbol').val() != '') {
+				localStorage.setItem('symbol', $('#symbol').val());
+			}
+		});
+		
+		$('#primarycolor').change(function() {
+			if ($('#primarycolor').val() != '') {
+				localStorage.setItem('primarycolor', $('#primarycolor').val());
+			}
+		});
+		
+		$('#motivations').change(function() {
+			if ($('#motivations').val() != '') {
+				localStorage.setItem('motivations', $('#motivations').val());
+			}
+		});
+		
+		$('#weapon').change(function() {
+			if ($('#weapon').val() != '') {
+				localStorage.setItem('weapon', $('#weapon').val());
+			}
+		});
+		
+		$('#reason').keyup(function() {
+			if ($('#reason').val() != '') {
+				localStorage.setItem('reason', $('#reason').val());
+			}
+		});
+		
+		//reset button
+		$('#reset').click(function(){
+			localStorage.clear();
+		});
+		
+		
 		// for an example of storing information from a multiple select,
 		// see line 266 from the objects demo from the slides 
 		// http://iam.colum.edu/Jon.Petto/ewt/local-storage/demo/objects.php
+		
+		if(navigator.geolocation) {
+			var geo_options = {
+				enableHighAccuracy: true,
+				timeout: 2000,
+				maximumAge: 5000
+			};	
+			navigator.geolocation.getCurrentPosition(found, notFound);
+		}
+		
 	});
 
 	function populate_form_with_stored_info() {
@@ -130,7 +250,62 @@
 		}
 
 		// check for stored age...
+		var stored_age = localStorage.getItem('age');
+		if (stored_age !== '') {
+			$('#age').val(stored_age);
+		}
+		
+		var stored_email = localStorage.getItem('email');
+		if (stored_email !== '') {
+			$('#email').val(stored_email);
+		}
+		
+		var stored_dayjob = localStorage.getItem('dayjob');
+		if (stored_dayjob !== '') {
+			$('#dayjob').val(stored_dayjob);
+		}
+		
+		var stored_startdate = localStorage.getItem('startdate');
+		if (stored_startdate !== '') {
+			$('#startdate').val(stored_startdate);
+		}
+		
+		var stored_blogurl = localStorage.getItem('blogurl');
+		if (stored_blogurl !== '') {
+			$('#blogurl').val(stored_blogurl);
+		}
+		
+		var stored_vigilantename = localStorage.getItem('vigilantename');
+		if (stored_vigilantename !== '') {
+			$('#vigilantename').val(stored_vigilantename);
+		}
+		
+		var stored_symbol = localStorage.getItem('symbol');
+		if (stored_blogurl !== '') {
+			$('#blogurl').val(stored_blogurl);
+		}
+		
+		var stored_primarycolor = localStorage.getItem('primarycolor');
+		if (stored_primarycolor !== '') {
+			$('#primarycolor').val(stored_primarycolor);
+		}
+		
+		var stored_motivations = localStorage.getItem('motivations');
+		if (stored_motivations !== '') {
+			$('#motivations').val(stored_motivations);
+		}
+		
+		var stored_weapon = localStorage.getItem('weapon');
+		if (stored_weapon !== '') {
+			$('#weapon').val(stored_weapon);
+		}
+		
+		var stored_reason = localStorage.getItem('reason');
+		if (stored_reason !== '') {
+			$('#reason').val(stored_reason);
+		}
 	}
+	
 </script>
 
 </body>
